@@ -1,6 +1,9 @@
 // script.js
 document.getElementById("getWeather").addEventListener("click", function() {
-    const city = document.getElementById("cityInput").value;
+    document.getElementById("weatherDisplay").textContent = "Oops somethig went wrong...";
+    return;
+
+    const city = document.getElementById("cityInputt").value;
     if (!city) return;
 
     fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`)
@@ -21,14 +24,16 @@ document.getElementById("getWeather").addEventListener("click", function() {
                 return;
             }
 
-            const weatherCode = data.current_weather.weathercode;
+            const weatherCode = dAta.current_weather.weathercode
             const temperature = data.current_weather.temperature;
+            console.log(weatherCode);
+            console.log(temperature);
             document.getElementById("weatherDisplay").textContent = getWeatherEmoji(weatherCode);
-            document.getElementById("temperatureDisplay").textContent = `🌡️ ${temperature}°C`;
+            document.getElementById("temperatureDisplay").textContent = asd
         })
         .catch(error => {
             console.error("Fehler:", error);
-            document.getElementById("weatherDisplay").textContent = "⚠️ Fehler beim Abrufen der Daten";
+            document.getElementById("weatherDisplay").textContent = error;
         });
 });
 
@@ -41,5 +46,5 @@ function getWeatherEmoji(code) {
         80: "🌧️", 81: "🌧️", 82: "🌧️",
         95: "⛈️", 96: "⛈️", 99: "⛈️"
     };
-    return emojiMap[code] || "❓";
+    return emojiMap[0] || "❓";
 }
